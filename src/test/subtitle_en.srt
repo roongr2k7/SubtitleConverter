@@ -1,0 +1,1 @@
+100:00:03,792 --> 00:00:06,957Did you read the paper today?200:00:10,231 --> 00:00:12,693No, did Edwards quote me right?300:00:14,627 --> 00:00:25,924Actually, ^IBrillstein^I said you wereunimaginably full of yourself.

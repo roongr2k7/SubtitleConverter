@@ -1,0 +1,23 @@
+//English subtitles
+$FontName           = Arial
+$FontSize           = 36
+$HorzAlign          = Center
+$VertAlign          = Bottom
+$XOffset            = 0
+$YOffset            = 0
+$ColorIndex1        = 0
+$ColorIndex2        = 2
+$ColorIndex3        = 8
+$ColorIndex4        = 3
+$Contrast1          = 15
+$Contrast2          = 0
+$Contrast3          = 15
+$Contrast4          = 0
+$ForceDisplay       = FALSE
+$FadeIn             = 3
+$FadeOut            = 7
+$TapeOffset         = FALSE
+
+00:00:03:24 , 00:00:06:29 , Did you read the paper today?
+00:00:10:07 , 00:00:12:21 , No, did Edwards quote me right?
+00:00:14:19 , 00:00:25:28 , Actually, ^IBrillstein^I said you were | unimaginably full of yourself.
