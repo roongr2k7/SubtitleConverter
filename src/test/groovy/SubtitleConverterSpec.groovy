@@ -1,7 +1,9 @@
 import spock.lang.*
+import groovy.mock.interceptor.MockFor
 
 class SubtitleConverterSpec extends Specification {
   def converter
+  def data
 
   def setup() {
     converter = new SubtitleConverter()
@@ -9,20 +11,33 @@ class SubtitleConverterSpec extends Specification {
 
   def 'convert STL to SRT'() {
     setup:
-    def outputFile = new File('./src/test/subtitle_en.srt')
-    def expectFile = new File('./src/test/expect_subtitle_en.srt')
+    def stlData = [
+      "00:00:03:15\t,\t00:00:05:26\t,\tTonight, The Deep Dive.",
+      "00:00:05:27\t,\t00:00:10:01\t,\tOne company's secret weapon for innovation",
+      "00:00:14:19 , 00:00:25:28 , Actually, ^IBrillstein^I said you were | unimaginably full of yourself."
+    ]
+    def expectData = [
+      "1\r00:00:03,495 --> 00:00:05,858\rTonight, The Deep Dive.\r\r",
+      "2\r00:00:05,891 --> 00:00:10,033\rOne company's secret weapon for innovation\r\r",
+      "3\r00:00:14,627 --> 00:00:25,924\rActually, ^IBrillstein^I said you were\runimaginably full of yourself.\r\r"
+    ]
+    def resultData = []
+    resultData.metaClass.close = {return true}
+    def myMockFile
+    myMockFile = [
+      filename: '',
+      newInstance: {filename -> return myMockFile},
+      newWriter: {unicode -> resultData},
+      eachLine: {closure -> stlData.each(closure)}
+    ]
 
     when:
-    converter.convertSTL2SRT('./src/test/subtitle_en.stl')
-    def outputText = outputFile.text
-    def expectText = expectFile.text
+    converter.convertSTL2SRT('someFilename.stl', myMockFile)
 
     then:
-    expectText == outputText
-
-    cleanup:
-      outputFile.delete()
+    expectData == resultData
   }
+
 
   def 'construct SRT'() {
     expect:
